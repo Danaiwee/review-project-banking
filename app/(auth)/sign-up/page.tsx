@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+
+import AuthHeader from "@/components/AuthHeader";
+import SignUpForm from "@/components/SignupForm";
 
 const SignUpPage = () => {
   return (
-    <div>SignUpPage</div>
-  )
-}
+    <section className="flex-center size-full max-sm:px-6">
+      <div className="auth-form">
+        <AuthHeader />
 
-export default SignUpPage
+        <SignUpForm />
+      </div>
+    </section>
+  );
+};
+
+export default SignUpPage;
