@@ -51,3 +51,17 @@ declare interface SignInParams {
   email: string;
   password: string;
 }
+
+declare interface ExchangePublicTokenParams {
+  publicToken: string;
+  user: User;
+}
+
+declare interface CreateBankAccountParams {
+  userId: string;
+  bankId: string;
+  accountId: string;
+  accessToken: string;
+  fundingSourceUrl: string;
+  shareableId: string;
+}

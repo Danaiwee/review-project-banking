@@ -492,4 +492,17 @@
   .input-class {
     @apply text-[14px] placeholder:text-[14px] rounded-lg border border-gray-300 text-gray-500 placeholder:text-gray-500 h-12;
   }
+
+  /* PlaidLink */
+  .plaidlink-primary {
+    @apply text-[16px] rounded-lg border font-semibold text-white shadow-md h-12 mt-5 cursor-pointer;
+  }
+
+  .plaidlink-ghost {
+    @apply flex cursor-pointer items-center justify-center gap-3 rounded-lg px-3 py-7 hover:bg-white lg:justify-start;
+  }
+
+  .plaidlink-default {
+    @apply flex justify-start cursor-pointer gap-3 rounded-lg bg-transparent flex-row;
+  }
 }
