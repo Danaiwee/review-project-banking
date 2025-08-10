@@ -1,13 +1,21 @@
+import { redirect } from "next/navigation";
 import React from "react";
 
 import BankCard from "@/components/BankCard";
 import HeaderBox from "@/components/HeaderBox";
-import { ACCOUNTS, AUTHUSER } from "@/constants";
+import { ACCOUNTS } from "@/constants";
+import { getAccounts } from "@/lib/actions/bank.actions";
+import { getLoggedInUser } from "@/lib/appwrite";
 
-const MyBanksPage = () => {
-  const authUser = AUTHUSER;
+const MyBanksPage = async () => {
+  const authUser = await getLoggedInUser();
+  if (!authUser) redirect("/sign-in");
+
+  const accounts = await getAccounts({ userId: authUser.$id });
+  if (!accounts) redirect("/sign-in");
 
   const username = `${authUser?.firstName} ${authUser?.lastName}`;
+  const accountsData = accounts?.data;
 
   return (
     <section className="flex">
@@ -23,7 +31,7 @@ const MyBanksPage = () => {
           </h2>
 
           <div className="flex flex-wrap gap-6">
-            {ACCOUNTS.map((account) => (
+            {accountsData?.map((account: Account) => (
               <BankCard
                 key={account.id}
                 account={account}

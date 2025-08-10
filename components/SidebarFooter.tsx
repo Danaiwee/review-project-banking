@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { logOut } from "@/lib/actions/user.actions";
 
@@ -21,7 +22,10 @@ const SidebarFooter = ({ user, type = "desktop" }: SidebarFooterProps) => {
     setisLoading(true);
     try {
       const response = await logOut();
-      if (response) router.push("/sign-in");
+      if (response) {
+        router.push("/sign-in");
+        toast("Success", { description: "Logged out successfully" });
+      }
     } catch (error) {
       console.log(error);
     } finally {

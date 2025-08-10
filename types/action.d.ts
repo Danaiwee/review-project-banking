@@ -65,3 +65,15 @@ declare interface CreateBankAccountParams {
   fundingSourceUrl: string;
   shareableId: string;
 }
+
+declare interface GetBanksParams {
+  userId: string;
+}
+
+declare interface GetAccountsParams {
+  userId: string;
+}
+
+declare interface GetInstitutionParams {
+  institutionId: string;
+}

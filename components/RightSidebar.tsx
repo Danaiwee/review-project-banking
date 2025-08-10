@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ACCOUNTS } from "@/constants";
 import { countTransactionCategories } from "@/lib/utils";
 
 import BankCard from "./BankCard";
 import Category from "./Category";
+import PlaidLink from "./PlaidLink";
 
 interface RightSidebarProps {
   user: User;
@@ -38,16 +38,13 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
       <section className="banks">
         <div className="flex w-full justify-between">
           <h2 className="header-2">My Banks</h2>
-          <Link href="/" className="flex gap-2">
-            <Image src="/icons/plus.svg" width={20} height={20} alt="plus" />
-            <h2 className="text-14 font-semibold text-gray-600">Add Bank</h2>
-          </Link>
+          <PlaidLink user={user} variant="ghost" />
         </div>
 
         {banks?.length > 0 && (
           <div className="relative flex flex-1 flex-col items-center justify-center gap-5">
             <div className="relative z-10 flex flex-col gap-2">
-              {ACCOUNTS.map((account) => (
+              {banks?.map((account) => (
                 <BankCard
                   key={account.id}
                   account={account}
@@ -65,7 +62,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
           </h2>
 
           <div className="space-y-5">
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <Category key={category.name} category={category} />
             ))}
           </div>

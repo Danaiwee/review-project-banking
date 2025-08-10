@@ -40,7 +40,8 @@ const BankCard = ({
               <h2 className="text-[12px] font-semibold text-white">●● / ●●</h2>
             </div>
             <p className="text-[14px] font-semibold tracking-[1.1px] text-white">
-              ●●●● ●●●● ●●●● <span className="text-[14px]">1234</span>
+              ●●●● ●●●● ●●●●{" "}
+              <span className="text-[14px]">{account?.mask}</span>
             </p>
           </article>
         </div>

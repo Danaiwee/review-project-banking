@@ -1,24 +1,31 @@
+import { redirect } from "next/navigation";
 import React from "react";
 
 import HeaderBox from "@/components/HeaderBox";
 import RecentTransaction from "@/components/RecentTransactions";
 import RightSidebar from "@/components/RightSidebar";
 import TotalBalanceBox from "@/components/TotalBalanceBox";
-import { ACCOUNTS, AUTHUSER, TRANSACTIONS } from "@/constants";
+import { ACCOUNTS, TRANSACTIONS } from "@/constants";
+import { getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/appwrite";
 
 const HomePage = async ({ searchParams }: SearchParamsProps) => {
-  const loggedIn = await getLoggedInUser();
+  const authUser = await getLoggedInUser();
+  if (!authUser) redirect("/sign-in");
 
-  console.log(loggedIn);
+  const accounts = await getAccounts({ userId: authUser.$id });
+  if (!accounts) redirect("/sign-in");
+
+  const accountsData = accounts?.data;
+  const totalBanks = accounts?.totalBanks;
+  const totalCurrentBalance = accounts?.totalCurrentBalance;
 
   const { id } = await searchParams;
-
-  const authUser = AUTHUSER;
-  const totalBanks = 1;
-  const totalCurrentBalance = 1250;
-  const appwriteItemId = (id as string) || "item_def456";
+  const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
   const currentPage = 1;
+
+  console.log("auth user: ", authUser);
+  console.log("accounts", accounts);
 
   return (
     <section className="home">
@@ -32,14 +39,14 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
           />
 
           <TotalBalanceBox
-            accounts={ACCOUNTS}
+            accounts={accountsData}
             totalBanks={totalBanks}
             totalCurrentBalance={totalCurrentBalance}
           />
         </header>
 
         <RecentTransaction
-          accounts={ACCOUNTS}
+          accounts={accountsData}
           transactions={TRANSACTIONS}
           appwriteItemId={appwriteItemId}
           page={currentPage}
@@ -49,7 +56,7 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
       <RightSidebar
         user={authUser}
         transactions={TRANSACTIONS}
-        banks={ACCOUNTS}
+        banks={accountsData}
       />
     </section>
   );
