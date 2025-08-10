@@ -25,9 +25,9 @@ const MobileNavbar = ({ user }: MobileNavbarProps) => {
   const pathname = usePathname();
 
   return (
-    <section className="w-fulll min-w-[200px] max-w-[264px]">
+    <section className="w-fulll flex justify-end">
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger className="flex justify-end">
           <Image
             src="/icons/hamburger.svg"
             width={30}
@@ -36,7 +36,7 @@ const MobileNavbar = ({ user }: MobileNavbarProps) => {
             className="cursor-pointer"
           />
         </SheetTrigger>
-        <SheetContent side="left" className="border-none bg-white">
+        <SheetContent side="left" className="border-none bg-white w-[300px]">
           <SheetTitle asChild>
             <Link
               href="/"

@@ -11,12 +11,12 @@ export const PaymentSchema = z.object({
 export const SignUpSchema = z.object({
   firstName: z.string().min(1, "First Name is required"),
   lastName: z.string().min(1, "Last Name is required"),
-  address: z.string().min(10, "Address must contain at least 10 characters"),
+  address1: z.string().min(10, "Address must contain at least 10 characters"),
   city: z.string().min(1, "City is required"),
   state: z
     .string()
-    .min(1, "State is required")
-    .max(3, "State cannot exceed 3 characters"),
+    .min(2, "State is required")
+    .max(2, "State cannot exceed 2 characters"),
   postalCode: z.string().min(1, "Postal code is required"),
   dateOfBirth: z
     .string()

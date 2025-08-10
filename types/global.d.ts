@@ -6,7 +6,7 @@ declare interface User {
   dwollaCustomerId: string;
   firstName: string;
   lastName: string;
-  address: string;
+  address1: string;
   city: string;
   state: string;
   postalCode: string;
@@ -48,8 +48,8 @@ declare interface Transaction {
 }
 
 declare interface SearchParamsProps {
-  params: { [key: string]: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<Record<string, string>>;
+  searchParams: Promise<Record<string, string>>;
 }
 
 declare type AccountTypes =

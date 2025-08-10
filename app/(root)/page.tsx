@@ -5,9 +5,14 @@ import RecentTransaction from "@/components/RecentTransactions";
 import RightSidebar from "@/components/RightSidebar";
 import TotalBalanceBox from "@/components/TotalBalanceBox";
 import { ACCOUNTS, AUTHUSER, TRANSACTIONS } from "@/constants";
+import { getLoggedInUser } from "@/lib/appwrite";
 
-const HomePage = ({ searchParams }: SearchParamsProps) => {
-  const { id } = searchParams;
+const HomePage = async ({ searchParams }: SearchParamsProps) => {
+  const loggedIn = await getLoggedInUser();
+
+  console.log(loggedIn);
+
+  const { id } = await searchParams;
 
   const authUser = AUTHUSER;
   const totalBanks = 1;

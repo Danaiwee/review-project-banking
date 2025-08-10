@@ -166,3 +166,16 @@ export function countTransactionCategories(
 
   return aggregatedCategories;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
+
+export function extractDwollaCustomerIdFromUrl(url: string) {
+  // Split the URL string by '/'
+  const parts = url.split("/");
+
+  // Extract the last part, which represents the customer ID
+  const customerId = parts[parts.length - 1];
+
+  return customerId;
+}

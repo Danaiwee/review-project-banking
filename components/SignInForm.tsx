@@ -3,10 +3,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
+import { signIn } from "@/lib/actions/user.actions";
 import { SignInSchema } from "@/lib/validations";
 
 import CustomInput from "./CustomInput";
@@ -14,6 +17,8 @@ import { Button } from "./ui/button";
 import { Form } from "./ui/form";
 
 const SignInForm = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
@@ -23,10 +28,21 @@ const SignInForm = () => {
   });
 
   const submit = async (data: z.infer<typeof SignInSchema>) => {
-    console.log(data);
+    setIsLoading(true);
+    try {
+      const response = await signIn(data);
+      if (response) {
+        toast("Success", { description: "Sign in successfully" });
+        router.push("/");
+        return;
+      }
+    } catch (error) {
+      toast("Error", { description: "Error in sign in" });
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  const isLoading = false;
 
   return (
     <>

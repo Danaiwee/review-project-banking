@@ -8,7 +8,7 @@ export const AUTHUSER: User = {
   dwollaCustomerId: "abcdef-123456",
   firstName: "John",
   lastName: "Doe",
-  address: "123 Main Street",
+  address1: "123 Main Street",
   city: "New York",
   state: "NY",
   postalCode: "10001",

@@ -3,10 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
+import { signUp } from "@/lib/actions/user.actions";
 import { SignUpSchema } from "@/lib/validations";
 
 import CustomInput from "./CustomInput";
@@ -14,14 +16,18 @@ import { Button } from "./ui/button";
 import { Form } from "./ui/form";
 
 const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
-      address: "",
+      address1: "",
       city: "",
       state: "",
+      dateOfBirth: "",
+      ssn: "",
       postalCode: "",
       email: "",
       password: "",
@@ -29,10 +35,16 @@ const SignUpForm = () => {
   });
 
   const submit = async (data: z.infer<typeof SignUpSchema>) => {
-    console.log(data);
+    setIsLoading(true);
+    try {
+      const response = await signUp(data);
+      if (response) toast("Success", { description: "Sign up successfully" });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  const isLoading = false;
 
   return (
     <>
@@ -55,7 +67,7 @@ const SignUpForm = () => {
 
           <CustomInput
             control={form.control}
-            name="address"
+            name="address1"
             label="Address"
             placeholder="Enter your address"
           />

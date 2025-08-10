@@ -1,4 +1,11 @@
+"use client";
+
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { logOut } from "@/lib/actions/user.actions";
 
 interface SidebarFooterProps {
   user: User;
@@ -6,9 +13,21 @@ interface SidebarFooterProps {
 }
 
 const SidebarFooter = ({ user, type = "desktop" }: SidebarFooterProps) => {
+  const [isLoading, setisLoading] = useState(false);
+  const router = useRouter();
   const { firstName, lastName } = user;
 
-  const handleLogout = () => {};
+  const handleLogout = async () => {
+    setisLoading(true);
+    try {
+      const response = await logOut();
+      if (response) router.push("/sign-in");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setisLoading(false);
+    }
+  };
 
   return (
     <footer className="footer">
@@ -28,7 +47,11 @@ const SidebarFooter = ({ user, type = "desktop" }: SidebarFooterProps) => {
       </div>
 
       <div className="footer-image" onClick={handleLogout}>
-        <Image src="icons/logout.svg" fill alt="jsm" />
+        {isLoading ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : (
+          <Image src="icons/logout.svg" fill alt="jsm" />
+        )}
       </div>
     </footer>
   );
