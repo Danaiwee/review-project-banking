@@ -1,11 +1,19 @@
+import { redirect } from "next/navigation";
 import React from "react";
 
 import HeaderBox from "@/components/HeaderBox";
 import PaymentForm from "@/components/PaymentForm";
-import { ACCOUNTS } from "@/constants";
+import { getAccounts } from "@/lib/actions/bank.actions";
+import { getLoggedInUser } from "@/lib/appwrite";
 
-const PaymentTransferPage = () => {
-  
+const PaymentTransferPage = async () => {
+  const authUser = await getLoggedInUser();
+  if (!authUser) redirect("/sign-in");
+
+  const accounts = await getAccounts({ userId: authUser.$id });
+  if (!accounts) redirect("/sign-in");
+
+  const accountsData = accounts?.data;
 
   return (
     <section className="payment-transfer no-scrollbar">
@@ -15,7 +23,7 @@ const PaymentTransferPage = () => {
       />
 
       <div className="size-full pt-5">
-        <PaymentForm accounts={ACCOUNTS} />
+        <PaymentForm accounts={accountsData} />
       </div>
     </section>
   );

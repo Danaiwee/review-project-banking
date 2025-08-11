@@ -68,8 +68,8 @@ export const getTransactionStatus = (date: Date) => {
   return date > twoDaysAgo ? "Processing" : "Success";
 };
 
-export const removeSpecialCharacters = (value: string) => {
-  return value.replace(/[^\w\s]/gi, "");
+export const removeSpecialCharacters = (value: string | null) => {
+  return value?.replace(/[^\w\s]/gi, "");
 };
 
 export const formatDateTime = (dateString: Date) => {

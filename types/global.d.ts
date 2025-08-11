@@ -31,7 +31,7 @@ declare interface Account {
 declare interface Transaction {
   id: string;
   $id: string;
-  name: string;
+  note: string;
   paymentChannel: string;
   type: string;
   accountId: string;
@@ -41,7 +41,7 @@ declare interface Transaction {
   date: string;
   image: string;
   type: string;
-  $createAt: string;
+  $createdAt: string;
   channel: string;
   senderBankId: string;
   receiverBankId: string;

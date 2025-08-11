@@ -77,3 +77,36 @@ declare interface GetAccountsParams {
 declare interface GetInstitutionParams {
   institutionId: string;
 }
+
+declare interface createTransactionParams {
+  note: string;
+  amount: string;
+  senderId: string;
+  senderBankId: string;
+  receiverBankId: string;
+  email: string;
+}
+
+declare interface GetBankParams {
+  appwriteItemId: string;
+}
+
+declare interface GetSampleTransactionsParams {
+  accessToken: string;
+}
+
+declare interface GetAccountWithSampleTransactionsParams {
+  appwriteItemId: string;
+}
+
+declare interface GetTransactionsParams {
+  appwriteItemId: string;
+}
+
+declare interface GetAccountWithTransactionsParams {
+  appwriteItemId: string;
+}
+
+declare interface GetBankByAccountId {
+  accountId: string;
+}

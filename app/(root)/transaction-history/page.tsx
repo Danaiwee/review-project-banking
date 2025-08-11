@@ -1,13 +1,34 @@
+import { redirect } from "next/navigation";
 import React from "react";
 
 import HeaderBox from "@/components/HeaderBox";
 import TransactionTable from "@/components/TransactionTable";
-import { ACCOUNTS, TRANSACTIONS } from "@/constants";
+import {
+  getAccounts,
+  getAccountWithTransactions,
+} from "@/lib/actions/bank.actions";
+import { getLoggedInUser } from "@/lib/appwrite";
 import { formatAmount } from "@/lib/utils";
 
-const TransactionHistoryPage = ({ searchParams }: SearchParamsProps) => {
-  const { id } = searchParams;
-  const account = ACCOUNTS[0];
+const TransactionHistoryPage = async ({ searchParams }: SearchParamsProps) => {
+  const authUser = await getLoggedInUser();
+  if (!authUser) redirect("/sign-in");
+
+  const accounts = await getAccounts({ userId: authUser.$id });
+  if (!accounts) redirect("/sign-in");
+
+  const accountsData = accounts?.data;
+
+  const { id } = await searchParams;
+  const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+
+  const accountAndTransactions = await getAccountWithTransactions({
+    appwriteItemId,
+  });
+  const account = accountAndTransactions?.account;
+  const transactions = accountAndTransactions.transactions;
+
+  console.log(account);
 
   return (
     <section className="transactions">
@@ -37,7 +58,7 @@ const TransactionHistoryPage = ({ searchParams }: SearchParamsProps) => {
         </div>
 
         <div className="flex w-full flex-col gap-6">
-          <TransactionTable transactions={TRANSACTIONS} />
+          <TransactionTable transactions={transactions} />
         </div>
       </div>
     </section>

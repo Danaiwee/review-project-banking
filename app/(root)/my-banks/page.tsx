@@ -3,7 +3,6 @@ import React from "react";
 
 import BankCard from "@/components/BankCard";
 import HeaderBox from "@/components/HeaderBox";
-import { ACCOUNTS } from "@/constants";
 import { getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/appwrite";
 

@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-
 import { countTransactionCategories } from "@/lib/utils";
 
 import BankCard from "./BankCard";
@@ -56,16 +53,24 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
           </div>
         )}
 
-        <div className="mt-10 flex flex-1 flex-col gap-6">
+        <div className="mt-3 flex flex-1 flex-col gap-6">
           <h2 className="text-[18px] font-semibold text-gray-900">
             Top categories
           </h2>
 
-          <div className="space-y-5">
-            {categories.map((category) => (
-              <Category key={category.name} category={category} />
-            ))}
-          </div>
+          {transactions?.length === 0 ? (
+            <div className="w-full flex-center gap-5">
+              <p className="text-sm text-gray-500 font-semibold">
+                No transaction data
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-5">
+              {categories.map((category) => (
+                <Category key={category.name} category={category} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </aside>
