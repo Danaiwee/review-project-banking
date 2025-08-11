@@ -19,7 +19,7 @@ const RecentTransactions = ({
   page,
   appwriteItemId,
 }: RecentTransactionsProps) => {
-  const rowsPerPage = 1;
+  const rowsPerPage = 10;
   const totalPages = Math.ceil(transactions?.length / rowsPerPage);
 
   const indexOfLastTransaction = Number(page) * rowsPerPage;

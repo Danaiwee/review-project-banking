@@ -48,6 +48,12 @@ const SignUpForm = () => {
 
   return (
     <>
+      <section className="flex flex-col gap-2">
+        <h1 className="font-semibold text-3xl text-gray-900">Sign up</h1>
+        <p className="text-gray-500 text-md font-semibold">
+          Please enter your details
+        </p>
+      </section>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(submit)} className="space-y-6">
           <div className="flex gap-4">
