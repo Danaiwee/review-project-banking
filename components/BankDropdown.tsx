@@ -4,7 +4,7 @@ import { useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import z from "zod";
 
-import { formUrlQury } from "@/lib/url";
+import { formUrlQuery } from "@/lib/url";
 import { formatAmount } from "@/lib/utils";
 import { PaymentSchema } from "@/lib/validations";
 
@@ -36,7 +36,7 @@ const BankDropdown = ({
     const account = accounts.find((a) => a.appwriteItemId === id)!;
 
     setSelected(account);
-    const newUrl = formUrlQury({
+    const newUrl = formUrlQuery({
       params: searchParams.toString(),
       key: "id",
       value: id,

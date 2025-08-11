@@ -22,15 +22,13 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
   const totalBanks = accounts?.totalBanks;
   const totalCurrentBalance = accounts?.totalCurrentBalance;
 
-  const { id } = await searchParams;
+  const { id, page } = await searchParams;
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
 
   const account = await getAccountWithTransactions({ appwriteItemId });
   const transactions = account?.transactions;
 
-  const currentPage = 1;
-
-  console.log("Transactions", transactions);
+  const currentPage = Number(page) || 1;
 
   return (
     <section className="home">

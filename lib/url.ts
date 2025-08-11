@@ -6,7 +6,7 @@ interface UrlQueryParams {
   value: string;
 }
 
-export const formUrlQury = ({ params, key, value }: UrlQueryParams) => {
+export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
   const currentUrl = qs.parse(params);
 
   currentUrl[key] = value;

@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 import HeaderBox from "@/components/HeaderBox";
+import Pagination from "@/components/Pagination";
 import TransactionTable from "@/components/TransactionTable";
 import {
   getAccounts,
@@ -19,7 +20,7 @@ const TransactionHistoryPage = async ({ searchParams }: SearchParamsProps) => {
 
   const accountsData = accounts?.data;
 
-  const { id } = await searchParams;
+  const { id, page } = await searchParams;
   const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
 
   const accountAndTransactions = await getAccountWithTransactions({
@@ -28,7 +29,16 @@ const TransactionHistoryPage = async ({ searchParams }: SearchParamsProps) => {
   const account = accountAndTransactions?.account;
   const transactions = accountAndTransactions.transactions;
 
-  console.log(account);
+  const currentPage = Number(page) || 1;
+  const rowsPerPage = 10;
+  const totalPages = Math.ceil(transactions?.length / rowsPerPage);
+
+  const indexOfLastTransaction = currentPage * rowsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
+  const currentTransactions = transactions?.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
 
   return (
     <section className="transactions">
@@ -58,9 +68,11 @@ const TransactionHistoryPage = async ({ searchParams }: SearchParamsProps) => {
         </div>
 
         <div className="flex w-full flex-col gap-6">
-          <TransactionTable transactions={transactions} />
+          <TransactionTable transactions={currentTransactions} />
         </div>
       </div>
+
+      <Pagination page={currentPage} totalPages={totalPages} />
     </section>
   );
 };

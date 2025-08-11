@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { formUrlQury } from "@/lib/url";
+import { formUrlQuery } from "@/lib/url";
 import { cn } from "@/lib/utils";
 
 interface BankTabItemProps {
@@ -16,7 +16,7 @@ const BankTabItem = ({ account, appwriteItemId }: BankTabItemProps) => {
   const isActive = appwriteItemId === account?.appwriteItemId;
 
   const handleBankChange = () => {
-    const newUrl = formUrlQury({
+    const newUrl = formUrlQuery({
       params: searhcParams.toString(),
       key: "id",
       value: account?.appwriteItemId,
