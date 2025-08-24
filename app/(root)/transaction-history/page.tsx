@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -10,6 +11,12 @@ import {
 } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/appwrite";
 import { formatAmount } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Next Bank | Transaction History",
+  description:
+    "Review your detailed transaction history with Next Bank. Track all deposits, withdrawals, and payments to stay on top of your finances.",
+};
 
 const TransactionHistoryPage = async ({ searchParams }: SearchParamsProps) => {
   const authUser = await getLoggedInUser();

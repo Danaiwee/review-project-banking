@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -5,6 +6,12 @@ import HeaderBox from "@/components/HeaderBox";
 import PaymentForm from "@/components/PaymentForm";
 import { getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/appwrite";
+
+export const metadata: Metadata = {
+  title: "Next Bank | Transfer fund",
+  description:
+    "Make fast and secure payment transfers with Next Bank. Send money easily to your contacts or other accounts anytime, anywhere.",
+};
 
 const PaymentTransferPage = async () => {
   const authUser = await getLoggedInUser();

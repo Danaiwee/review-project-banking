@@ -1,12 +1,14 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 
 import MobileNavbar from "@/components/MobileNavbar";
 import Sidebar from "@/components/Sidebar";
-import { AUTHUSER } from "@/constants";
+import { getLoggedInUser } from "@/lib/appwrite";
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  const authUser = AUTHUSER;
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  const authUser = await getLoggedInUser();
+  if (!authUser) redirect("/sign-in");
 
   return (
     <main className="flex h-screen w-full font-inter">

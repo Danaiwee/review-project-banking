@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -5,6 +6,12 @@ import BankCard from "@/components/BankCard";
 import HeaderBox from "@/components/HeaderBox";
 import { getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/appwrite";
+
+export const metadata: Metadata = {
+  title: "Next Bank | My Banks",
+  description:
+    "View and manage your bank cards securely on Next Bank. Check card details and balances",
+};
 
 const MyBanksPage = async () => {
   const authUser = await getLoggedInUser();

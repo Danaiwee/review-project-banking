@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -10,6 +11,12 @@ import {
   getAccountWithTransactions,
 } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/appwrite";
+
+export const metadata: Metadata = {
+  title: "Next bank | Home page",
+  description:
+    "Welcome to Next Bank — your trusted partner for secure and convenient online banking. Manage accounts, track transactions, and access financial tools all in one place.",
+};
 
 const HomePage = async ({ searchParams }: SearchParamsProps) => {
   const authUser = await getLoggedInUser();

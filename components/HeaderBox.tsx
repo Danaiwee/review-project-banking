@@ -1,8 +1,8 @@
 interface HeaderBoxProps {
-  type?: string;
   title: string;
-  user?: User | null;
   subtext: string;
+  type?: string;
+  user?: User | null;
 }
 
 const HeaderBox = ({ type, title, user = null, subtext }: HeaderBoxProps) => {
