@@ -38,7 +38,11 @@ const SignUpForm = () => {
     setIsLoading(true);
     try {
       const response = await signUp(data);
-      if (response) toast("Success", { description: "Sign up successfully" });
+      if (response) {
+        toast("Success", { description: "Sign up successfully" });
+        return;
+      }
+      toast("Error", { description: "Please provide a valid informations" });
     } catch (error) {
       console.log(error);
     } finally {
