@@ -40,8 +40,8 @@ const TransactionTable = ({ transactions }: TransactionTableProps) => {
               const status = getTransactionStatus(new Date(transaction.date));
               const amount = formatAmount(transaction.amount);
 
-              const isDebit = transaction.type === "debit";
-              const isCredit = transaction.type === "credit";
+              const isDebit = transaction.type === "debit"; // pay
+              const isCredit = transaction.type === "credit";// received
 
               return (
                 <TableRow

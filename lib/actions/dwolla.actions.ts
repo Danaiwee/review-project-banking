@@ -2,6 +2,7 @@
 
 import { Client } from "dwolla-v2";
 
+//DWOLLA configuration
 const getEnvironment = () => {
   const environment = process.env.DWOLLA_ENV as string;
 
@@ -16,7 +17,6 @@ const getEnvironment = () => {
       );
   }
 };
-
 const dwollaClient = new Client({
   environment: getEnvironment(),
   key: process.env.DWOLLA_KEY as string,
@@ -39,13 +39,25 @@ export const createFundingSource = async (
   }
 };
 
-export const createOnDemandAuthorization = async () => {
+export const createOnDemandAuthorization = async () => { 
   try {
     const onDemandAuthorization = await dwollaClient.post(
       "on-demand-authorizations"
     );
     const authLink = onDemandAuthorization.body._links;
     return authLink;
+    /*
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388"
+                }   
+            },
+      "bodyText": "I agree that future payments to Company ABC inc. will be processed by the Dwolla payment system from the selected account above. In order to cancel this authorization, I will change my payment settings within my Company ABC inc. account.",
+      "buttonText": "Agree & Continue"
+    }
+    */
+
   } catch (err) {
     console.error("Creating an On Demand Authorization Failed: ", err);
   }
@@ -61,7 +73,7 @@ export const createDwollaCustomer = async (
   } catch (err) {
     console.error("Creating a Dwolla Customer Failed: ", err);
   }
-};
+}; //return  => 'https://api-sandbox.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
 
 export const createTransfer = async ({
   sourceFundingSourceUrl,
@@ -85,7 +97,7 @@ export const createTransfer = async ({
     };
     return await dwollaClient
       .post("transfers", requestBody)
-      .then((res) => res.headers.get("location"));
+      .then((res) => res.headers.get("location")); // => 'https://api-sandbox.dwolla.com/transfers/81643da1-b1b3-e911-811b-f08aa77f5aa3'
   } catch (err) {
     console.error("Transfer fund failed: ", err);
   }
@@ -107,7 +119,7 @@ export const addFundingSource = async ({
       plaidToken: processorToken,
       _links: dwollaAuthLinks,
     };
-    return await createFundingSource(fundingSourceOptions);
+    return await createFundingSource(fundingSourceOptions); //=> 'https://api-sandbox.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31'
   } catch (err) {
     console.error("Transfer fund failed: ", err);
   }

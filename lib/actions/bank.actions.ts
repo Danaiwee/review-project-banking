@@ -56,7 +56,7 @@ export const getBank = async ({ appwriteItemId }: GetBankParams) => {
     const bank = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal("$id", [appwriteItemId])]
+      [Query.equal("$id", [appwriteItemId])] //appwriteItemId = bank.$id
     );
     if (!bank) throw new Error("Bank not found");
 
@@ -180,7 +180,7 @@ export const getAccountWithTransactions = async ({
   appwriteItemId,
 }: GetAccountWithTransactionsParams) => {
   try {
-    const bank = await getBank({ appwriteItemId });
+    const bank = await getBank({ appwriteItemId }); //appwriteId = bank.$id
 
     const accountsResponse = await plaidClient.accountsGet({
       access_token: bank.accessToken,
