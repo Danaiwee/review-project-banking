@@ -42,7 +42,7 @@ const SignUpForm = () => {
         toast("Success", { description: "Sign up successfully" });
         return;
       }
-      toast("Error", { description: "Please provide a valid informations" });
+      toast("Error", { description: "Please provide valid informations" });
     } catch (error) {
       console.log(error);
     } finally {
@@ -59,7 +59,7 @@ const SignUpForm = () => {
         </p>
       </section>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(submit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(submit)} className="space-y-5">
           <div className="flex gap-4">
             <CustomInput
               control={form.control}

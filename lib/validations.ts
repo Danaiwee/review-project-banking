@@ -3,9 +3,9 @@ import { z } from "zod";
 export const PaymentSchema = z.object({
   email: z.string().email("Invalid emaill address"),
   note: z.string().min(4, "Transfer note is too short"),
-  amount: z.string().min(4, "Amount is too short"),
+  amount: z.string().min(1, "Amount is required"),
   senderBank: z.string().min(4, "Please select a valid bank account"),
-  shareableId: z.string().min(8, "Please select a valid shareable Id"),
+  shareableId: z.string().min(8, "Please select a valid shareable id"),
 });
 
 export const SignUpSchema = z.object({

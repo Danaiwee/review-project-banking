@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-inter: "inter", sans-serif;
-  --font-ibm-plex-serif: "ibmPlexSerif", sans-serif;
+  --font-inter: var(--font-inter);
+  --font-ibm-plex-serif: var(--font-ibm-plex-serif);
 }
 
 @theme inline {
@@ -158,9 +158,6 @@
 
 /*Custom CSS*/
 @theme {
-  --font-inter: var(--font-inter);
-  --font-IBMPlexSerif: var(--font-IBMPlexSerif);
-
   --color-indigo-500: #6172f3;
   --color-indigo-700: #3538cd;
 
@@ -458,11 +455,11 @@
 
   /* Auth Layout*/
   .auth-asset {
-    @apply flex h-screen w-full sticky top-0 items-center justify-end bg-sky-1 max-lg:hidden;
+    @apply flex h-screen w-full sticky top-0 items-center justify-end bg-sky-1 max-xl:hidden;
   }
 
   .auth-form {
-    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8;
+    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-4 py-5 md:gap-4;
   }
 
   .form-item {

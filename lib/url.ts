@@ -15,6 +15,6 @@ export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
       url: window.location.pathname,
       query: currentUrl,
     },
-    { skipNull: true }
+    { skipNull: true } //ignore the null value
   );
 };

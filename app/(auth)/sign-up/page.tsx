@@ -14,8 +14,7 @@ export const metadata: Metadata = {
 
 const SignUpPage = async () => {
   const authUser = await getLoggedInUser();
-
-  console.log("Log in user: ", authUser);
+  
   return (
     <section className="flex-center size-full max-sm:px-6">
       <div className="auth-form">

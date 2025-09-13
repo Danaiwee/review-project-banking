@@ -97,15 +97,15 @@ export const getAccounts = async ({ userId }: GetAccountsParams) => {
         const accountData = accountResponse.data.accounts[0];
 
         //get institution info from plaid
-        const institution = await getInstitution({
-          institutionId: accountResponse.data.item.institution_id!,
-        });
+        // const institution = await getInstitution({
+        //   institutionId: accountResponse.data.item.institution_id!,
+        // });
 
         const account = {
           id: accountData.account_id,
           availableBalance: accountData.balances.available!,
           currentBalance: accountData.balances.current!,
-          institutionId: institution.institution_id,
+          institutionId: accountResponse.data.item.institution_id!,
           name: accountData.name,
           officialName: accountData.official_name,
           mask: accountData.mask!,
@@ -188,15 +188,15 @@ export const getAccountWithTransactions = async ({
 
     const accountData = accountsResponse.data.accounts[0];
 
-    const institution = await getInstitution({
-      institutionId: accountsResponse.data.item.institution_id!,
-    });
+    // const institution = await getInstitution({
+    //   institutionId: accountsResponse.data.item.institution_id!,
+    // });
 
     const account = {
       id: accountData.account_id,
       availableBalance: accountData.balances.available!,
       currentBalance: accountData.balances.current!,
-      institutionId: institution.institution_id,
+      institutionId: accountsResponse.data.item.institution_id!,
       name: accountData.name,
       offialName: accountData.official_name,
       mask: accountData.mask!,

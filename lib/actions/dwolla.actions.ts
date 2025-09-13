@@ -17,11 +17,24 @@ const getEnvironment = () => {
       );
   }
 };
+
 const dwollaClient = new Client({
   environment: getEnvironment(),
   key: process.env.DWOLLA_KEY as string,
   secret: process.env.DWOLLA_SECRET as string,
 });
+
+export const createDwollaCustomer = async (
+  newCustomer: NewDwollaCustomerParams
+) => {
+  try {
+    return await dwollaClient
+      .post("customers", newCustomer)
+      .then((res) => res.headers.get("location"));
+  } catch (err) {
+    console.error("Creating a Dwolla Customer Failed: ", err);
+  }
+}; //return  => 'https://api-sandbox.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
 
 //Crate a Dwolla Funding Source using a Plaid processor Token
 export const createFundingSource = async (
@@ -39,7 +52,7 @@ export const createFundingSource = async (
   }
 };
 
-export const createOnDemandAuthorization = async () => { 
+export const createOnDemandAuthorization = async () => {
   try {
     const onDemandAuthorization = await dwollaClient.post(
       "on-demand-authorizations"
@@ -57,23 +70,10 @@ export const createOnDemandAuthorization = async () => {
       "buttonText": "Agree & Continue"
     }
     */
-
   } catch (err) {
     console.error("Creating an On Demand Authorization Failed: ", err);
   }
 };
-
-export const createDwollaCustomer = async (
-  newCustomer: NewDwollaCustomerParams
-) => {
-  try {
-    return await dwollaClient
-      .post("customers", newCustomer)
-      .then((res) => res.headers.get("location"));
-  } catch (err) {
-    console.error("Creating a Dwolla Customer Failed: ", err);
-  }
-}; //return  => 'https://api-sandbox.dwolla.com/customers/FC451A7A-AE30-4404-AB95-E3553FCD733F'
 
 export const createTransfer = async ({
   sourceFundingSourceUrl,

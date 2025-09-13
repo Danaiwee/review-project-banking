@@ -101,7 +101,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
     if (!newUser) throw new Error("Error in create user");
 
     const session = await account.createEmailPasswordSession(email, password);
-    /*session return object
+    /*session returned object
     {
       "$id": "64a1b3c2d45e1",
       "userId": "6478c88d9c12a", => newAccount.$id
@@ -161,7 +161,7 @@ export const createLinkToken = async (user: User) => {
       products: ["auth"] as Products[],
       language: "en",
       country_codes: ["US"] as CountryCode[],
-    };
+    };  
 
     const response = await plaidClient.linkTokenCreate(tokenParams);
 
