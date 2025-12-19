@@ -33,6 +33,7 @@ const Sidebar = ({ user }: SidebarProps) => {
           />
           <h1 className="sidebar-logo">Next</h1>
         </Link>
+
         {SIDEBAR_LINKS.map((item) => {
           const isActive =
             pathname === item.route || pathname.startsWith(`${item.route}/`);
@@ -57,7 +58,6 @@ const Sidebar = ({ user }: SidebarProps) => {
             </Link>
           );
         })}
-        Plaid Link
       </nav>
 
       <SidebarFooter user={user} />

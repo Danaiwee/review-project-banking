@@ -22,7 +22,10 @@ export const SignUpSchema = z.object({
     .string()
     .min(1, "Date of birth is required")
     .max(10, "Cannot exceed 8 characters"),
-  ssn: z.string().min(1, "SSN is required"),
+  ssn: z
+    .string()
+    .min(4, "SSN must contain at least 4 characters")
+    .max(4, "SSN cannot exceed 4 characters"),
   email: z.email().min(1, "Email is required"),
   password: z
     .string()

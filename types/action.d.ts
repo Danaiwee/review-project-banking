@@ -15,7 +15,7 @@ declare interface CreateFundingSourceOptions {
   customerId: string; //Dwolla customer ID
   fundingSourceName: string;
   plaidToken: string;
-  _links: object;
+  // _links: object;
 }
 
 declare interface TransferParams {

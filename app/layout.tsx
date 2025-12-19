@@ -15,7 +15,7 @@ const ibmPlexSerif = IBM_Plex_Serif({
 
 export const metada: Metadata = {
   title: "Next Bank",
-  description: "Next Bank is a modern banking playform for everyone.",
+  description: "Next Bank is a modern banking platform for everyone.",
   icons: "/icons/logo.svg",
 };
 

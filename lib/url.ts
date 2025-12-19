@@ -7,12 +7,12 @@ interface UrlQueryParams {
 }
 
 export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
-  const currentUrl = qs.parse(params);
+  const currentUrl = qs.parse(params); // id=123 >> {id: "123"}
 
   currentUrl[key] = value;
   return qs.stringifyUrl(
     {
-      url: window.location.pathname,
+      url: window.location.pathname, // /dashboard
       query: currentUrl,
     },
     { skipNull: true } //ignore the null value

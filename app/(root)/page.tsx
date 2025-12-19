@@ -37,6 +37,7 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
 
   const currentPage = Number(page) || 1;
 
+
   return (
     <section className="home">
       <div className="home-content no-scrollbar">

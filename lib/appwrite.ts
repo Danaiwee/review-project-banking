@@ -57,3 +57,24 @@ export async function getLoggedInUser() {
     return null;
   }
 }
+
+/*Example of account object from appwrite
+
+{
+  "$id": "65f1a2b3c4d5e6f7g8h9",        // The unique User ID (very important!)
+  "$createdAt": "2023-10-27T12:00:00.000+00:00",
+  "$updatedAt": "2023-10-27T15:30:00.000+00:00",
+  "name": "John Doe",                   // The full name you passed during signup
+  "registration": "2023-10-27T12:00:00.000+00:00",
+  "status": true,                       // Whether the account is active
+  "passwordUpdate": "2023-10-27T12:00:00.000+00:00",
+  "email": "john.doe@example.com",      // User's email address
+  "phone": "+123456789",                // Empty if not provided
+  "emailVerification": true,            // Whether they clicked a verify link
+  "phoneVerification": false,
+  "prefs": {},                          // Custom settings (e.g., dark mode: true)
+  "accessedAt": "2023-10-28T09:00:00.000+00:00"
+}
+
+*/
+  

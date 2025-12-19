@@ -36,6 +36,7 @@ const BankDropdown = ({
     const account = accounts.find((a) => a.appwriteItemId === id)!;
 
     setSelected(account);
+    
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
       key: "id",

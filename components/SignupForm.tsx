@@ -42,9 +42,11 @@ const SignUpForm = () => {
         toast("Success", { description: "Sign up successfully" });
         return;
       }
-      toast("Error", { description: "Please provide valid informations" });
     } catch (error) {
       console.log(error);
+      toast("Error", {
+        description: "An error occurred, please try again later",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -94,13 +96,13 @@ const SignUpForm = () => {
               control={form.control}
               name="state"
               label="State"
-              placeholder="Enter your state"
+              placeholder="eg. NY"
             />
             <CustomInput
               control={form.control}
               name="postalCode"
               label="Postal Code"
-              placeholder="Enter your postal code"
+              placeholder="eg. 10700"
             />
           </div>
 
@@ -109,13 +111,13 @@ const SignUpForm = () => {
               control={form.control}
               name="dateOfBirth"
               label="Date Of Birth"
-              placeholder="Enter your date of birth"
+              placeholder="eg. 1995-01-01"
             />
             <CustomInput
               control={form.control}
               name="ssn"
               label="SSN"
-              placeholder="Enter your ssn"
+              placeholder="eg. 1234 (4 digits)"
             />
           </div>
 

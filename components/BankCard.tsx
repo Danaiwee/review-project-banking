@@ -8,13 +8,13 @@ import ShareableCopy from "./ShareableCopy";
 interface BankCardProps {
   account: Account;
   userName: string;
-  showBalance?: boolean;
+  showShareable?: boolean;
 }
 
 const BankCard = ({
   account,
   userName,
-  showBalance = false,
+  showShareable = false,
 }: BankCardProps) => {
   return (
     <div className="flex flex-col">
@@ -66,7 +66,7 @@ const BankCard = ({
         />
       </Link>
 
-      {showBalance && <ShareableCopy shareableId={account?.shareableId} />}
+      {showShareable && <ShareableCopy shareableId={account?.shareableId} />}
     </div>
   );
 };

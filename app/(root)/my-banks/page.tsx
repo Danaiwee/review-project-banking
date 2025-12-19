@@ -28,7 +28,7 @@ const MyBanksPage = async () => {
       <div className="my-banks">
         <HeaderBox
           title="My Bank Accounts"
-          subtext="Effortly manage yout banking activities"
+          subtext="Effortly manage your banking activities"
         />
 
         <div className="space-y-4">
@@ -42,7 +42,7 @@ const MyBanksPage = async () => {
                 key={account.id}
                 account={account}
                 userName={username}
-                showBalance
+                showShareable
               />
             ))}
           </div>

@@ -36,7 +36,7 @@ const SignInForm = () => {
         router.push("/");
         return;
       }
-      toast("Error", { description: "Invalid enail or password" });
+      toast("Error", { description: "Invalid email or password" });
     } catch (error) {
       toast("Error", { description: "Error in sign in" });
       console.log(error);

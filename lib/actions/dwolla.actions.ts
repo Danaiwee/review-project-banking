@@ -52,28 +52,6 @@ export const createFundingSource = async (
   }
 };
 
-export const createOnDemandAuthorization = async () => {
-  try {
-    const onDemandAuthorization = await dwollaClient.post(
-      "on-demand-authorizations"
-    );
-    const authLink = onDemandAuthorization.body._links;
-    return authLink;
-    /*
-    {
-      "_links": {
-        "self": {
-          "href": "https://api.dwolla.com/on-demand-authorizations/30e7c028-0bdf-e511-80de-0aa34a9b2388"
-                }   
-            },
-      "bodyText": "I agree that future payments to Company ABC inc. will be processed by the Dwolla payment system from the selected account above. In order to cancel this authorization, I will change my payment settings within my Company ABC inc. account.",
-      "buttonText": "Agree & Continue"
-    }
-    */
-  } catch (err) {
-    console.error("Creating an On Demand Authorization Failed: ", err);
-  }
-};
 
 export const createTransfer = async ({
   sourceFundingSourceUrl,
@@ -109,15 +87,12 @@ export const addFundingSource = async ({
   bankName,
 }: AddFundingSourceParams) => {
   try {
-    // create dwolla auth link
-    const dwollaAuthLinks = await createOnDemandAuthorization();
-
+    
     // add funding source to the dwolla customer & get the funding source url
     const fundingSourceOptions = {
       customerId: dwollaCustomerId,
       fundingSourceName: bankName,
       plaidToken: processorToken,
-      _links: dwollaAuthLinks,
     };
     return await createFundingSource(fundingSourceOptions); //=> 'https://api-sandbox.dwolla.com/funding-sources/375c6781-2a17-476c-84f7-db7d2f6ffb31'
   } catch (err) {
